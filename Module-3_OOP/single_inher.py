@@ -8,9 +8,10 @@ class father:
     
 class son(father):
     def printdata(self):
-        print("Car:",self.car)
-        print("Bank Balance:",self.bal)
+        print("Total Car:",self.car)
+        print("Total Balance:",self.bal)
 
 sn=son()
 sn.getdata()
 sn.printdata()
+
