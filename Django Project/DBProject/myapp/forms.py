@@ -7,3 +7,9 @@ class userForm(forms.ModelForm):
     class Meta:
         model=userData
         fields='__all__'
+
+
+class updateForm(forms.ModelForm):
+    class Meta:
+        model=userData
+        fields=['name','email','mobile']

@@ -11,14 +11,14 @@
     <hr>
     <form method="post">
         {% csrf_token %}
-        <input type="text" placeholder="Enter Name" name="name"><br><br>
-        <input type="email" placeholder="Enter Email" name="email"><br><br>
-        <input type="number" placeholder="Enter Mobile" name="mobile"><br><br>
-        <input type="date" placeholder="Enter DOB" name="dob"><br><br>
-        <textarea placeholder="Address" name="address"></textarea><br><br>
+        <input type="text" placeholder="Enter Name" name="name" value="{{user.name}}"><br><br>
+        <input type="email" placeholder="Enter Email" name="email" value="{{user.email}}"><br><br>
+        <input type="number" placeholder="Enter Mobile" name="mobile" value="{{user.mobile}}"><br><br>
+        <input type="date" placeholder="Enter DOB" name="dob" value="{{user.dob}}" hidden><br><br>
+        <textarea placeholder="Address" name="address" hidden></textarea><br><br>
         <input type="submit" value="Save">
     </form>
     <hr>
-    <a href="confirm">Showdata</a>
+    <a href="/confirm">Showdata</a>
 </body>
 </html>
