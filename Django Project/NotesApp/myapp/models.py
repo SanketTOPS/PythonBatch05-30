@@ -11,3 +11,10 @@ class userSignup(models.Model):
     state=models.CharField(max_length=20)
     mobile=models.BigIntegerField()
 
+
+class mynotes(models.Model):
+    title=models.CharField(max_length=200)
+    cate=models.CharField(max_length=100)
+    myfiles=models.FileField(upload_to="MyNotes")
+    comments=models.TextField()
+   

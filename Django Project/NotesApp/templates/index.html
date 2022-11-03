@@ -16,6 +16,14 @@
 </head>
 
 <body>
+    {% for msg in messages %}
+    <!-- {{msg}} -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
     <!--Navbar Start-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -110,6 +118,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- {% for msg in messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong> {{msg}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %} -->
                     <form method="post">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -176,7 +190,8 @@
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom01" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="validationCustom01" required>
+                            <input type="password" name="password" class="form-control" id="validationCustom01"
+                                required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
