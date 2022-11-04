@@ -27,9 +27,12 @@ def index(request):
             unm=request.POST['username']
             pas=request.POST['password']
 
+            uid=userSignup.objects.get(username=unm)
+            print("USerID:",uid.id)
             user=userSignup.objects.filter(username=unm,password=pas)
             if user: #true
                 request.session['user']=unm #session created
+                request.session['userid']=uid.id
                 print("Login Successfully!")
                 return redirect('notes')
             else:
@@ -51,3 +54,17 @@ def notes(request):
 def userlogout(request):
     logout(request)
     return redirect('/')
+
+def profile(request):
+    uid=request.session.get('userid')
+    user=request.session.get('user')
+    cuser=userSignup.objects.get(id=uid)
+    if request.method=='POST':
+        updateuser=usersignupForm(request.POST)
+        if updateuser.is_valid():
+            updateuser=usersignupForm(request.POST,instance=cuser)
+            updateuser.save()
+            print("Your profile has been updated!")
+        else:
+            print(updateuser.errors)
+    return render(request,'profile.html',{'user':user,'cuser':userSignup.objects.get(id=uid)})
