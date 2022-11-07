@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import usersignupForm,notesForm
+from .forms import usersignupForm,notesForm,feedbackForm
 from .models import userSignup
 from django.contrib.auth import logout
 from django.contrib import messages
@@ -68,3 +68,16 @@ def profile(request):
         else:
             print(updateuser.errors)
     return render(request,'profile.html',{'user':user,'cuser':userSignup.objects.get(id=uid)})
+
+def about(request):
+    return render(request,'about.html')
+
+def contact(request):
+    if request.method=='POST':
+        sendfeedback=feedbackForm(request.POST)
+        if sendfeedback.is_valid():
+            sendfeedback.save()
+            print("Your feedback has been submitted!")
+        else:
+            print(sendfeedback.errors)
+    return render(request,'contact.html')
