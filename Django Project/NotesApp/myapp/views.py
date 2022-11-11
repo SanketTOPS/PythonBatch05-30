@@ -3,6 +3,8 @@ from .forms import usersignupForm,notesForm,feedbackForm
 from .models import userSignup
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.core.mail import send_mail
+from NotesApp import settings
 
 # Create your views here.
 
@@ -19,6 +21,15 @@ def index(request):
                 except userSignup.DoesNotExist:
                     newuser.save()
                     print("User created successfully!")
+
+                    # Email Send Code
+                    sub="Welcome!"
+                    msg=f"Hello User,\n\nWelcome to NotesApp.\nYour account has been created with us!\nEnjoy our services.\n\nThanks & Regards\n+91 9724799469 | query@notesapp.com"
+                    #from_ID="djangotestmail2021@gmail.com"
+                    from_ID=settings.EMAIL_HOST_USER
+                    #to_ID=['dishu.vora@gmail.com','sanketchauhanios@gmail.com']
+                    to_ID=[request.POST['username']]
+                    send_mail(subject=sub,message=msg,from_email=from_ID,recipient_list=to_ID)
                     return redirect('notes')
             else:
                 print(newuser.errors)
