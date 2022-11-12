@@ -5,6 +5,8 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.core.mail import send_mail
 from NotesApp import settings
+import requests
+import random
 
 # Create your views here.
 
@@ -45,6 +47,26 @@ def index(request):
                 request.session['user']=unm #session created
                 request.session['userid']=uid.id
                 print("Login Successfully!")
+
+                otp=random.randint(1111,9999)
+                # SMS Sending
+                """url = "https://www.fast2sms.com/dev/bulkV2"
+                querystring = {"authorization":"PSqGhvu5BkQv1WEvvWH6PIgV0vr1IcOIEzgsN1fZMHFG0WJapJ1hGGIwYfq8","variables_values":f"{otp}","route":"otp","numbers":"9879316741,9724799469"}
+                headers = {
+                    'cache-control': "no-cache"
+                }
+                response = requests.request("GET", url, headers=headers, params=querystring)
+                print(response.text)"""
+
+                url = "https://www.fast2sms.com/dev/bulkV2"
+
+                querystring = {"authorization":"PSqGhvu5BkQv1WEvvWH6PIgV0vr1IcOIEzgsN1fZMHFG0WJapJ1hGGIwYfq8","message":f"Dear User\nYour account has been logged in with newer version of platform.\nIf you so ignore this sms.\nThank & Regards\nNotesApp Team","language":"english","route":"q","numbers":"9879316741,9724799469"}
+                headers = {
+                    'cache-control': "no-cache"
+                }
+                response = requests.request("GET", url, headers=headers, params=querystring)
+                print(response.text)
+
                 return redirect('notes')
             else:
                 #print("Error....Plz try again!")
