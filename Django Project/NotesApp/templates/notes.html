@@ -63,6 +63,9 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/profile">Update Profile</a></li>
+                        {% if user is superuser %}
+                        <li><a class="dropdown-item" href="/shownotes">Show All Notes</a></li>
+                        {% endif %}
                         <li><a class="dropdown-item" href="/userlogout">Logout</a></li>
                     </ul>
                 </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .forms import usersignupForm,notesForm,feedbackForm
-from .models import userSignup
+from .models import userSignup,mynotes
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -114,3 +114,7 @@ def contact(request):
         else:
             print(sendfeedback.errors)
     return render(request,'contact.html')
+
+def shownotes(request):
+    allnotes=mynotes.objects.all()
+    return render(request,'shownotes.html',{'allnotes':allnotes})
