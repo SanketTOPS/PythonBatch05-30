@@ -38,3 +38,35 @@ def deletedata(request,id):
         return Response(status=status.HTTP_202_ACCEPTED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['POST'])
+def savedata(request):
+    if request.method=='POST':
+        studserial=studSerializer(data=request.data)
+        if studserial.is_valid():
+            studserial.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def updatedata(request,id):
+    try:
+        uid=studinfo.objects.get(id=id)
+        #serial=studSerializer(uid)
+        #return Response(serial.data)
+    except studinfo.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method=='PUT':
+        serial=studSerializer(uid,data=request.data)
+        if serial.is_valid():
+            serial.save()
+            return Response(data=serial.data,status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_400_BAD_REQUEST) 
+    
+    
+
+
+
